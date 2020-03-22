@@ -11,5 +11,4 @@ export interface Change {
     newDeaths: number;
     growthPercent: number;
 
-
 }

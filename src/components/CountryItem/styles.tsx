@@ -3,45 +3,51 @@ import { StyleSheet, Platform } from 'react-native';
 const styles = StyleSheet.create({
 
 
-    header: {
-
+    countryItem: {
+        flex: 1,
         flexDirection: 'row',
-        paddingVertical: 25,
-        borderBottomColor: 'white',
-        borderBottomWidth: 2,
+        paddingVertical: 20,
+        borderBottomColor: 'gray',
+        borderBottomWidth: 1,
         width: "100%"
-    },
 
+    },
 
     labelText: {
         flex: 1,
         textAlign: "center",
         alignItems: "center",
         alignSelf: "center",
-        fontSize: 16,
+        fontSize: 18,
+
         fontFamily: Platform.OS === 'ios' ? 'AvenirNext-Regular' : 'Roboto',
         width: "100%"
+    },
+
+
+    countryName: {
+        color: '#70a1ff',
+    },
+
+
+    recoveredNumber: {
+        color: '#2ecc71',
+    },
+
+
+    deathsNumber: {
+        color: '#bdc3c7',
+
+    },
+
+    confirmedNumber: {
+        color: 'rgb(244, 19, 19)',
+
     },
 
     confirmedText: {
         color: '#ecf0f1',
 
-    },
-
-
-
-    countryText: {
-        color: '#1e90ff',
-    },
-
-    deathsText: {
-        color: '#7f8c8d'
-
-    },
-
-
-    recovredText: {
-        color: '#27ae60'
     },
 
 
