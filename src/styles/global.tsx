@@ -10,7 +10,7 @@ export const HEADER_TEXT_COLOR = '#fff';
 
 export const MUTED_COLOR = '#8e8786';
 
-export const LINK_COLOR = '#48e9d9';
+export const LINK_COLOR = '#19ccba';
 
 export const ACCENT_COLORS = ['#d31d65', '#751c53', '#c248c0', '#7d6e8b', '#bbc6f7'];
 

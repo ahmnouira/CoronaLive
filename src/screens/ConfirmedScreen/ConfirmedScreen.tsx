@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, FlatList, ActivityIndicator, StatusBar } from 'react-native';
+import { View, Text, FlatList, ActivityIndicator, StatusBar, ScrollView, SafeAreaView } from 'react-native';
 import global from '../../styles';
 import styles from './styles';
 import { casesByCountry } from '../../utils/api';
@@ -54,15 +54,20 @@ class ConfirmedScreen extends React.Component {
 
     const { country_name, cases, deaths, total_recovered } = item;
 
-    return <CountryItem name={country_name} cases={cases} deaths={deaths} recovered={total_recovered} />
+    return <CountryItem seriousColor={false} name={country_name} cases={cases} deaths={deaths} recovered={total_recovered} />
   }
+
+
+  _renderCountries = () => this.state['info'].map((c: CountryInfo) =>
+    <CountryItem seriousColor={false} key={c.key} name={c.country_name} cases={c.cases} deaths={c.deaths} recovered={c.total_recovered} />
+  )
 
   render() {
 
 
 
     return (
-      <View style={{ flex: 1, backgroundColor: global.BG_COLOR }}>
+      <SafeAreaView style={{ flex: 1, backgroundColor: global.BG_COLOR }}>
         <StatusBar barStyle="dark-content" />
         <View style={styles.header}>
           <Text style={[styles.labelText, styles.countryText]}>Country</Text>
@@ -78,11 +83,12 @@ class ConfirmedScreen extends React.Component {
         )}
 
         {!this.state['isLoading'] && (
-          <View>
-            <FlatList data={this.state['info']} renderItem={this._renderItem} keyExtractor={this._keyExtractor} />
-          </View>
+          <ScrollView style={{}}>
+            {/*<FlatList data={this.state['info']} renderItem={this._renderItem} keyExtractor={this._keyExtractor} /> */}
+            {this._renderCountries()}
+          </ScrollView>
         )}
-      </View >
+      </SafeAreaView >
     )
 
   }

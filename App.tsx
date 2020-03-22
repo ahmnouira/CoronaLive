@@ -18,7 +18,7 @@ export default function App() {
         inactiveTintColor: global.LINK_COLOR,
         inactiveBackgroundColor: global.BG_COLOR,
         activeBackgroundColor: global.BG_COLOR,
-        activeTintColor: global.LINK_COLOR,
+        activeTintColor: '#8cf1e7',
         labelStyle: { fontFamily: 'Roboto' }
       }} screenOptions={({ route }) => ({
         tabBarIcon: ({ focused, color, size }) => {
@@ -28,9 +28,8 @@ export default function App() {
             iconName = 'ios-people';
           }
 
-          else if (route.name === 'Plots') {
-            iconName = 'md-analytics';
-
+          else if (route.name === 'Map') {
+            iconName = 'md-globe';
           }
 
           else if (route.name === 'Data') {
@@ -38,13 +37,15 @@ export default function App() {
 
           }
 
-          else if (route.name === 'Countries') {
-            iconName = 'md-globe';
+          else if (route.name === 'Stats') {
+            iconName = 'ios-paper'
+              ;
 
           }
 
-          else if (route.name === 'Active') {
-            iconName = 'ios-pulse';
+          else if (route.name === 'New') {
+            iconName = 'ios-medkit';
+
 
           }
 
@@ -54,10 +55,10 @@ export default function App() {
 
       })}>
         <Tab.Screen name="Totals" component={TotalsScreen} />
-        <Tab.Screen name="Countries" component={ConfirmedScreen} />
-        <Tab.Screen name="Plots" component={PlotsScreen} />
+        <Tab.Screen name="Stats" component={ConfirmedScreen} />
         <Tab.Screen name="Data" component={DataScreen} />
-        <Tab.Screen name="Active" component={ActiveScreen} />
+        <Tab.Screen name="Map" component={PlotsScreen} />
+        <Tab.Screen name="New" component={ActiveScreen} />
       </Tab.Navigator>
     </NavigationContainer>
   );

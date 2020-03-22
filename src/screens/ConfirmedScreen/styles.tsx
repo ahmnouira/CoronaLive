@@ -2,16 +2,13 @@ import { StyleSheet, Platform } from 'react-native';
 
 const styles = StyleSheet.create({
 
-
     header: {
-
         flexDirection: 'row',
         paddingVertical: 25,
         borderBottomColor: 'white',
         borderBottomWidth: 2,
         width: "100%"
     },
-
 
     labelText: {
         flex: 1,
@@ -25,10 +22,7 @@ const styles = StyleSheet.create({
 
     confirmedText: {
         color: '#ecf0f1',
-
     },
-
-
 
     countryText: {
         color: '#1e90ff',
@@ -39,12 +33,9 @@ const styles = StyleSheet.create({
 
     },
 
-
     recovredText: {
         color: '#27ae60'
     },
-
-
 
 });
 

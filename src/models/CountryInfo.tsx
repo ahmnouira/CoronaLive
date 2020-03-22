@@ -12,7 +12,8 @@ export class CountryInfo {
     active_cases?: string; // active nows
     cases?: string;    // confirmed
     country_name?: string;
-    deaths?: string
+    deaths?: string;
+    key?: string;
     new_cases?: string;   // new cases
     new_deaths?: string;
     region?: string;
