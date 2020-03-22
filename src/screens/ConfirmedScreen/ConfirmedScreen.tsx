@@ -1,38 +1,49 @@
 import React from 'react';
-import { View, Text, FlatList } from 'react-native';
+import { View, Text, FlatList, ActivityIndicator, StatusBar } from 'react-native';
 import global from '../../styles';
 import styles from './styles';
-import { casesByCountry, getAffectedCountries } from '../../utils/api';
+import { casesByCountry } from '../../utils/api';
 import { CountryInfo } from '../../models/CountryInfo';
 import CountryItem from '../../components/CountryItem';
+import { ApiData } from '../../models/ApiData';
 
-const DATA: Array<CountryInfo> = [
-
-
-  { cases: "123.34", country_name: 'France', deaths: "22", total_recovered: "4445" },
-  { cases: "4334.2", country_name: 'Russia', deaths: "555", total_recovered: "123" },
-  { cases: "12.98", country_name: 'Hollanda', deaths: "12", total_recovered: "1" },
-
-]
-
-
-/* function Item({ title }) {
-  return (
-    <View style={styles.item}>
-      <Text style={styles.item}>{title}</Text>
-    </View>
-  );
-}
- */
 
 class ConfirmedScreen extends React.Component {
 
-  constructor(props) {
+
+  constructor(props: any) {
+
     super(props);
+
     this.state = {
-      data: this._addKeys(DATA)
+      info: Array<CountryInfo>(),
+      lastUpdate: '',
+      isLoading: true
+
     }
+
   }
+
+  componentDidMount() {
+    this._getData();
+
+  }
+
+
+  _getData(): void {
+
+    casesByCountry().then((res: ApiData) => {
+
+      const { statistic_taken_at, countries_stat } = res;
+
+      console.log(countries_stat);
+
+      this.setState({ isLoading: false, info: this._addKeys(countries_stat), lastUpdate: statistic_taken_at });
+    });
+
+  }
+
+  _keyExtractor = (item: CountryInfo) => item.country_name;
 
 
   _addKeys = (arrCountryInfo: CountryInfo[]) =>
@@ -44,33 +55,36 @@ class ConfirmedScreen extends React.Component {
     const { country_name, cases, deaths, total_recovered } = item;
 
     return <CountryItem name={country_name} cases={cases} deaths={deaths} recovered={total_recovered} />
-
-  }
-
-
-  componentDidMount() {
-
-    /* 
-    getAffectedCountries().then(data => console.log('getAffectedCountries:', data));
-    casesByCountry().then((data) => console.log('casesByContry:', data))
- 
-    */
   }
 
   render() {
+
+
+
     return (
       <View style={{ flex: 1, backgroundColor: global.BG_COLOR }}>
+        <StatusBar barStyle="dark-content" />
         <View style={styles.header}>
           <Text style={[styles.labelText, styles.countryText]}>Country</Text>
           <Text style={[styles.labelText, styles.confirmedText]}>Confirmed</Text>
           <Text style={[styles.labelText, styles.recovredText]}> Recovered</Text>
           <Text style={[styles.labelText, styles.deathsText]}>Deaths</Text>
         </View>
-        <View>
-          <FlatList data={DATA} renderItem={this._renderItem} />
-        </View>
+
+        {this.state['isLoading'] && (
+          <View style={[global.COMMON_STYLES.container, { backgroundColor: global.BG_COLOR }]}>
+            <ActivityIndicator animating={true} color="white" size="large" />
+          </View>
+        )}
+
+        {!this.state['isLoading'] && (
+          <View>
+            <FlatList data={this.state['info']} renderItem={this._renderItem} keyExtractor={this._keyExtractor} />
+          </View>
+        )}
       </View >
     )
+
   }
 }
 

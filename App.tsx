@@ -38,8 +38,8 @@ export default function App() {
 
           }
 
-          else if (route.name === 'Confirmed') {
-            iconName = 'ios-checkmark-circle';
+          else if (route.name === 'Countries') {
+            iconName = 'md-globe';
 
           }
 
@@ -54,7 +54,7 @@ export default function App() {
 
       })}>
         <Tab.Screen name="Totals" component={TotalsScreen} />
-        <Tab.Screen name="Confirmed" component={ConfirmedScreen} />
+        <Tab.Screen name="Countries" component={ConfirmedScreen} />
         <Tab.Screen name="Plots" component={PlotsScreen} />
         <Tab.Screen name="Data" component={DataScreen} />
         <Tab.Screen name="Active" component={ActiveScreen} />
