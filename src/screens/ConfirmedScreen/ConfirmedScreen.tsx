@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, FlatList, ActivityIndicator, StatusBar, ScrollView, SafeAreaView } from 'react-native';
+import { View, Text, Button, ActivityIndicator, StatusBar, ScrollView, SafeAreaView } from 'react-native';
 import global from '../../styles';
 import styles from './styles';
 import { casesByCountry } from '../../utils/api';
@@ -30,13 +30,27 @@ class ConfirmedScreen extends React.Component {
   }
 
 
-  _getData(): void {
+  _filterByCountryName = () => {
+    let list: Array<CountryInfo> = this.state['info'];
+
+    let sorted = list.sort((a, b) => {
+      if (a.country_name < b.country_name) return -1;
+      if (a.country_name > b.country_name) return 1;
+      return 0;
+    });
+    this.setState({ info: this._addKeys(sorted) });
+  }
+
+
+  _getData(filter?: string): void {
 
     casesByCountry().then((res: ApiData) => {
 
-      const { statistic_taken_at, countries_stat } = res;
+      let { statistic_taken_at, countries_stat } = res;
 
-      console.log(countries_stat);
+      if (filter === 'total_recovered' || filter === 'deaths') {
+        countries_stat = countries_stat.sort((a, b) => parseInt(b[filter].replace(/,/g, '')) - parseInt(a[filter].replace(/,/g, '')));
+      }
 
       this.setState({ isLoading: false, info: this._addKeys(countries_stat), lastUpdate: statistic_taken_at });
     });
@@ -70,10 +84,10 @@ class ConfirmedScreen extends React.Component {
       <SafeAreaView style={{ flex: 1, backgroundColor: global.BG_COLOR }}>
         <StatusBar barStyle="dark-content" />
         <View style={styles.header}>
-          <Text style={[styles.labelText, styles.countryText]}>Country</Text>
-          <Text style={[styles.labelText, styles.confirmedText]}>Confirmed</Text>
-          <Text style={[styles.labelText, styles.recovredText]}> Recovered</Text>
-          <Text style={[styles.labelText, styles.deathsText]}>Deaths</Text>
+          <Text style={[styles.labelText, styles.countryText]} onPress={() => this._filterByCountryName()}>Country</Text>
+          <Text style={[styles.labelText, styles.confirmedText]} onPress={() => this._getData()}>Confirmed</Text>
+          <Text style={[styles.labelText, styles.recovredText]} onPress={() => this._getData('total_recovered')}> Recovered</Text>
+          <Text style={[styles.labelText, styles.deathsText]} onPress={() => this._getData('deaths')}>Deaths</Text>
         </View>
 
         {this.state['isLoading'] && (

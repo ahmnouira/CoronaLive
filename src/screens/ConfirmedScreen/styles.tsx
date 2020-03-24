@@ -10,12 +10,14 @@ const styles = StyleSheet.create({
         width: "100%"
     },
 
+
     labelText: {
         flex: 1,
         textAlign: "center",
         alignItems: "center",
         alignSelf: "center",
         fontSize: 16,
+
         fontFamily: Platform.OS === 'ios' ? 'AvenirNext-Regular' : 'Roboto',
         width: "100%"
     },

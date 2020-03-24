@@ -56,8 +56,8 @@ export default function App() {
       })}>
         <Tab.Screen name="Totals" component={TotalsScreen} />
         <Tab.Screen name="Stats" component={ConfirmedScreen} />
-        <Tab.Screen name="Data" component={DataScreen} />
         <Tab.Screen name="Map" component={PlotsScreen} />
+        <Tab.Screen name="Data" component={DataScreen} />
         <Tab.Screen name="New" component={ActiveScreen} />
       </Tab.Navigator>
     </NavigationContainer>

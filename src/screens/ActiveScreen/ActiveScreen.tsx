@@ -18,30 +18,44 @@ class ActiveScreen extends React.Component {
 
     this.state = {
       info: Array<CountryInfo>(),
+      listOfCountries: Array<CountryInfo>(),
       lastUpdate: '',
       isLoading: true
     }
   }
 
   componentDidMount() {
+    // init
     this._getData();
 
   }
 
 
-  _getData(): void {
+  _getData(filter: string = 'new_cases'): void {
 
     casesByCountry().then((res: ApiData) => {
-
       const { statistic_taken_at, countries_stat } = res;
 
-      let sorted: CountryInfo[] = countries_stat.sort((a, b) => parseInt(b.new_cases.replace(/,/g, '')) - parseInt(a.new_cases.replace(/,/g, '')));
-
+      let sorted: CountryInfo[] = countries_stat.sort((a, b) => parseInt(b[filter].replace(/,/g, '')) - parseInt(a[filter].replace(/,/g, '')));
       this.setState({ isLoading: false, info: this._addKeys(sorted), lastUpdate: statistic_taken_at });
     });
 
   }
 
+
+  
+
+
+  _filterByCountryName = () => {
+    let list: Array<CountryInfo> = this.state['info'];
+
+    let sorted = list.sort((a, b) => {
+      if (a.country_name < b.country_name) return -1;
+      if (a.country_name > b.country_name) return 1;
+      return 0;
+    });
+    this.setState({ info: this._addKeys(sorted) });
+  }
 
   _addKeys = (arrCountryInfo: CountryInfo[]) =>
     arrCountryInfo.map(countryInfo => Object.assign(countryInfo, { key: countryInfo.country_name }))
@@ -54,15 +68,14 @@ class ActiveScreen extends React.Component {
 
   render() {
 
-
     return (
       <SafeAreaView style={{ flex: 1, backgroundColor: global.BG_COLOR }}>
         <StatusBar barStyle="dark-content" />
         <View style={styles.header}>
-          <Text style={[styles.labelText, styles.countryText]}>Country</Text>
-          <Text style={[styles.labelText, styles.confirmedText]}>Cases</Text>
-          <Text style={[styles.labelText, { color: '#81ecec' }]}>Serious</Text>
-          <Text style={[styles.labelText, styles.deathsText]}>Deaths</Text>
+          <Text style={[styles.labelText, styles.countryText]} onPress={() => this._filterByCountryName()}>Country</Text>
+          <Text style={[styles.labelText, styles.confirmedText]} onPress={() => this._getData()}>Cases</Text>
+          <Text style={[styles.labelText, { color: '#81ecec' }]} onPress={() => this._getData('serious_critical')}>Serious</Text>
+          <Text style={[styles.labelText, styles.deathsText]} onPress={() => this._getData('new_deaths')}>Deaths</Text>
         </View>
 
         {this.state['isLoading'] && (

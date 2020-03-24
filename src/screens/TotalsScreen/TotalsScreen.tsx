@@ -31,15 +31,22 @@ class TotalsScreen extends React.Component {
       let totalDeaths = countries_stat.map((c) => parseInt(c.deaths.replace(/,/g, ''))).reduce((pValue, cValue) => pValue + cValue, 0);
       let totalRecoverd = countries_stat.map((c) => parseInt(c.total_recovered.replace(/,/g, ''))).reduce((pValue, cValue) => pValue + cValue, 0);
 
+      console.log(countries_stat);
 
       this.setState({
         isLoading: false,
-        totalConfirmed: totalConfirmed.toString(),
-        totalDeaths: totalDeaths.toString(),
-        totalRecoverd: totalRecoverd.toString()
+        totalConfirmed: this.numberWithCommas(totalConfirmed),
+        totalDeaths: this.numberWithCommas(totalDeaths),
+        totalRecoverd: this.numberWithCommas(totalRecoverd)
       })
     });
   }
+
+
+  numberWithCommas(x: number): string {
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  }
+
 
 
   componentDidMount() {
