@@ -28,22 +28,22 @@ export default function App() {
             iconName = 'ios-people';
           }
 
-          else if (route.name === 'Map') {
-            iconName = 'md-globe';
-          }
-
-          else if (route.name === 'Data') {
-            iconName = 'ios-stats';
-
-          }
-
           else if (route.name === 'Stats') {
             iconName = 'ios-paper'
               ;
 
           }
 
-          else if (route.name === 'New') {
+          else if (route.name === 'Plots') {
+            iconName = 'ios-pulse';
+          }
+
+          else if (route.name === 'Analytics') {
+            iconName = 'ios-stats';
+
+          }
+
+          else if (route.name === 'News') {
             iconName = 'ios-medkit';
 
 
@@ -56,9 +56,9 @@ export default function App() {
       })}>
         <Tab.Screen name="Totals" component={TotalsScreen} />
         <Tab.Screen name="Stats" component={ConfirmedScreen} />
-        <Tab.Screen name="Map" component={PlotsScreen} />
-        <Tab.Screen name="Data" component={DataScreen} />
-        <Tab.Screen name="New" component={ActiveScreen} />
+        <Tab.Screen name="Plots" component={PlotsScreen} />
+        <Tab.Screen name="Analytics" component={DataScreen} />
+        <Tab.Screen name="News" component={ActiveScreen} />
       </Tab.Navigator>
     </NavigationContainer>
   );
