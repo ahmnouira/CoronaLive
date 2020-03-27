@@ -1,21 +1,30 @@
 {
   "expo": {
-    "name": "Blank Template (TypeScript)",
+    "name": "CoronaLive",
+    "android": {
+      "config": {
+        "googleMobileAdsAppId": "ca-app-pub-8120812323524890~7173838622"
+      },
+      "package": "com.ahmnouira.CoronaLive",
+      "versionCode": 1
+    },
+    "backgroundColor": "#343336",
     "slug": "CoronaLive",
-    "privacy": "public",
+    "privacy": "unlisted",
     "sdkVersion": "36.0.0",
     "platforms": [
       "ios",
       "android",
       "web"
     ],
+    "description": "CoronaLive App allows you to have fast, rapid overview of the COVID-19 Cases-Recoverd-Deaths arround the world",
     "version": "1.0.0",
-    "orientation": "portrait",
+    "orientation": "default",
     "icon": "./assets/icon.png",
     "splash": {
       "image": "./assets/splash.png",
-      "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "resizeMode": "cover",
+      "backgroundColor": "#001635"
     },
     "updates": {
       "fallbackToCacheTimeout": 0
@@ -24,6 +33,8 @@
       "**/*"
     ],
     "ios": {
+      "bundleIdentifier": "com.ahmnouira.CoronaLive",
+      "buildNumber": "1.0.0",
       "supportsTablet": true
     }
   }

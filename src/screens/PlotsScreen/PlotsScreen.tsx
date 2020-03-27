@@ -1,17 +1,18 @@
 import React from 'react';
-import { View, Text, StatusBar, ActivityIndicator, Dimensions } from 'react-native';
+import { View, Text, StatusBar, ActivityIndicator, Dimensions, Platform } from 'react-native';
 import global from '../../styles';
 import styles from './styles';
 import {
-  BarChartProps, BarChart, PieChart, ChartData, ChartConfig, ProgressChartData
+  BarChart, PieChart, ChartConfig,
 
 } from "react-native-chart-kit";
 import gloabl from '../../styles';
 import { casesByCountry } from '../../utils/api';
 import { ApiData } from '../../models/ApiData';
 import { CountryInfo } from '../../models/CountryInfo';
+import { PublisherBanner } from 'expo-ads-admob';
 
-
+const bannerID = "ca-app-pub-8120812323524890/4108691585";
 
 const barConfig: ChartConfig = {
 
@@ -106,7 +107,7 @@ class PlotsScreen extends React.Component {
 
       };
 
-     //  console.log('barData', barData);
+      //  console.log('barData', barData);
 
 
       let totaleWorldCases = countries_stat.map((c) => parseInt(c.cases.replace(/,/g, ''))).reduce((pValue, cValue) => pValue + cValue, 0);
@@ -223,6 +224,9 @@ class PlotsScreen extends React.Component {
 
         />
         <Text style={styles.text}>Corona Around The World</Text>
+        {Platform.OS !== "web" && (
+          <PublisherBanner bannerSize="smartBannerPortrait" adUnitID={bannerID} />
+        )}
         <PieChart
           data={this.state['pieData']}
           width={width}

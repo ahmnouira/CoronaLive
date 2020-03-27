@@ -1,12 +1,14 @@
 import React from 'react';
-import { View, Text, StatusBar, ActivityIndicator } from 'react-native';
+import { View, Text, StatusBar, ActivityIndicator, Platform } from 'react-native';
 import global from '../../styles';
 import styles from './styles';
 import { casesByCountry } from '../../utils/api';
 import { ApiData } from '../../models/ApiData';
+import { AdMobBanner } from 'expo-ads-admob';
+
+const bannerID = "ca-app-pub-8120812323524890/4108691585";
 
 class TotalsScreen extends React.Component {
-
 
   constructor(props) {
     super(props);
@@ -84,6 +86,9 @@ class TotalsScreen extends React.Component {
           <Text style={[styles.labelText, styles.recovredText]}>Total Recovered</Text>
           <Text style={[styles.numberText, styles.recoveredNumber]}>{this.state['totalRecoverd']}</Text>
         </View>
+        {Platform.OS !== "web" && (
+          <AdMobBanner bannerSize="banner" adUnitID={bannerID} testID="EMULATOR" servePersonalizedAds={false} />
+        )}
       </View>
     )
   }

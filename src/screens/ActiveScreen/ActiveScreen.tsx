@@ -71,8 +71,9 @@ class ActiveScreen extends React.Component {
     return (
       <SafeAreaView style={{ flex: 1, backgroundColor: global.BG_COLOR }}>
         <StatusBar barStyle="dark-content" />
+        
         <View style={styles.header}>
-          <Text style={[styles.labelText, styles.countryText]} onPress={() => this._filterByCountryName()}>Country</Text>
+          <Text  style={[styles.labelText, styles.countryText]} onPress={() => this._filterByCountryName()}>Country</Text>
           <Text style={[styles.labelText, styles.confirmedText]} onPress={() => this._getData()}>Cases</Text>
           <Text style={[styles.labelText, { color: '#81ecec' }]} onPress={() => this._getData('serious_critical')}>Serious</Text>
           <Text style={[styles.labelText, styles.deathsText]} onPress={() => this._getData('new_deaths')}>Deaths</Text>

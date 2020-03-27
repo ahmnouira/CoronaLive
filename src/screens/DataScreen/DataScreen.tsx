@@ -10,6 +10,7 @@ import { casesByCountry } from '../../utils/api';
 import { ApiData } from '../../models/ApiData';
 import { CountryInfo } from '../../models/CountryInfo';
 
+
 const progressConfig: ChartConfig = {
 
     // the first color in the linear of chat's background

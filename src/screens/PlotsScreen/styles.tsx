@@ -7,7 +7,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center'
     },
     text: {
-        paddingVertical: 20,
+        paddingVertical: 15,
         textAlign: "center",
         fontSize: 24,
         color: "#bdc3c7",
