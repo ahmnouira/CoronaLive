@@ -8,79 +8,49 @@ import ConfirmedScreen from './src/screens/ConfirmedScreen';
 import DataScreen from './src/screens/DataScreen/DataScreen';
 import { Ionicons } from '@expo/vector-icons';
 import global from './src/styles';
-import { AdMobInterstitial } from 'expo-ads-admob';
 
 const Tab = createBottomTabNavigator();
 
-export default class App extends React.Component {
+export default function App() {
 
-  constructor(props) {
+  return (
+    <NavigationContainer>
+      <Tab.Navigator initialRouteName="Totals" tabBarOptions={{
+        inactiveTintColor: global.LINK_COLOR,
+        inactiveBackgroundColor: global.BG_COLOR,
+        activeBackgroundColor: global.BG_COLOR,
+        activeTintColor: '#8cf1e7',
+        labelStyle: { fontFamily: 'Roboto' }
+      }} screenOptions={({ route }) => ({
+        tabBarIcon: ({ focused, color, size }) => {
+          let iconName: string;
 
-    super(props);
-
-  }
-  componentDidMount() {
-    this.openInterstitial().then(() => console.log('ok')).catch((err) => console.error(err));
-  }
-
-  openInterstitial = async () => {
-    await AdMobInterstitial.setAdUnitID('ca-app-pub-8120812323524890/4595437432');
-    AdMobInterstitial.requestAdAsync().then(() => AdMobInterstitial.showAdAsync()).catch((err) => console.log(err));
-  }
-
-
-
-  render() {
-
-    return (
-      <NavigationContainer>
-        <Tab.Navigator initialRouteName="Totals" tabBarOptions={{
-          inactiveTintColor: global.LINK_COLOR,
-          inactiveBackgroundColor: global.BG_COLOR,
-          activeBackgroundColor: global.BG_COLOR,
-          activeTintColor: '#8cf1e7',
-          labelStyle: { fontFamily: 'Roboto' }
-        }} screenOptions={({ route }) => ({
-          tabBarIcon: ({ focused, color, size }) => {
-            let iconName: string;
-
-            if (route.name === 'Totals') {
+          switch (route.name) {
+            case 'Totals':
               iconName = 'ios-people';
-            }
-
-            else if (route.name === 'Stats') {
-              iconName = 'ios-paper'
-                ;
-
-            }
-
-            else if (route.name === 'Plots') {
+              break;
+            case 'Stats':
+              iconName = 'ios-paper';
+              break;
+            case 'Plots':
               iconName = 'ios-pulse';
-            }
-
-            else if (route.name === 'Analytics') {
+              break;
+            case 'Analytics':
               iconName = 'ios-stats';
-
-            }
-
-            else if (route.name === 'News') {
+              break;
+            case 'News':
               iconName = 'ios-medkit';
+          }
+          return <Ionicons name={iconName} size={size} color={color} />
+        },
 
-
-            }
-
-            return <Ionicons name={iconName} size={size} color={color} />
-          },
-
-
-        })}>
-          <Tab.Screen name="Totals" component={TotalsScreen} />
-          <Tab.Screen name="Stats" component={ConfirmedScreen} />
-          <Tab.Screen name="Plots" component={PlotsScreen} />
-          <Tab.Screen name="Analytics" component={DataScreen} />
-          <Tab.Screen name="News" component={ActiveScreen} />
-        </Tab.Navigator>
-      </NavigationContainer >
-    );
-  }
+      })}>
+        <Tab.Screen name="Totals" component={TotalsScreen} />
+        <Tab.Screen name="Stats" component={ConfirmedScreen} />
+        <Tab.Screen name="Plots" component={PlotsScreen} />
+        <Tab.Screen name="Analytics" component={DataScreen} />
+        <Tab.Screen name="News" component={ActiveScreen} />
+      </Tab.Navigator>
+    </NavigationContainer >
+  );
 }

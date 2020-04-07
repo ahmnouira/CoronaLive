@@ -1,96 +1,55 @@
 import React from 'react';
-import { View, Text, StatusBar, ActivityIndicator, Platform } from 'react-native';
-import global from '../../styles';
+import { View, Text, StatusBar } from 'react-native';
 import styles from './styles';
 import { casesByCountry } from '../../utils/api';
+import { numberWithComma, totalOf } from '../../utils/helpers';
 import { ApiData } from '../../models/ApiData';
-import { AdMobBanner } from 'expo-ads-admob';
+import Loading from '../../components/Loading/Loading';
+import global from '../../styles';
 
-const bannerID = "ca-app-pub-8120812323524890/4108691585";
+export default function TotalsScreen(): JSX.Element {
 
-class TotalsScreen extends React.Component {
+  const [totalConfirmed, setTotalConfirmed] = React.useState('');
+  const [totalDeaths, setTotalDeaths] = React.useState('');
+  const [totalRecovred, setTotalRecovred] = React.useState('');
+  const [isLoading, setIsLoading] = React.useState(true);
 
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      totalConfirmed: '',
-      totalDeaths: '',
-      totalRecoverd: '',
-      isLoading: true
-    }
-
-  }
-
-
-  _getTotats() {
+  React.useEffect(() => {
 
     casesByCountry().then((res: ApiData) => {
 
       const { statistic_taken_at, countries_stat } = res;
 
-      let totalConfirmed = countries_stat.map((c) => parseInt(c.cases.replace(/,/g, ''))).reduce((pValue, cValue) => pValue + cValue, 0);
-      let totalDeaths = countries_stat.map((c) => parseInt(c.deaths.replace(/,/g, ''))).reduce((pValue, cValue) => pValue + cValue, 0);
-      let totalRecoverd = countries_stat.map((c) => parseInt(c.total_recovered.replace(/,/g, ''))).reduce((pValue, cValue) => pValue + cValue, 0);
+      setTotalConfirmed(numberWithComma(totalOf(countries_stat, 'cases')));
+      setTotalDeaths(numberWithComma(totalOf(countries_stat, 'deaths')));
+      setTotalRecovred(numberWithComma(totalOf(countries_stat, 'total_recovered')));
+      setIsLoading(false);
 
-      console.log(countries_stat);
+    }).catch(err => console.error(err));
+  });
 
-      this.setState({
-        isLoading: false,
-        totalConfirmed: this.numberWithCommas(totalConfirmed),
-        totalDeaths: this.numberWithCommas(totalDeaths),
-        totalRecoverd: this.numberWithCommas(totalRecoverd)
-      })
-    });
-  }
-
-
-  numberWithCommas(x: number): string {
-    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-  }
-
-
-
-  componentDidMount() {
-    this._getTotats();
-
-  }
-
-
-  render() {
-
-    if (this.state['isLoading']) {
-      return (
-        <View style={[global.COMMON_STYLES.container, { backgroundColor: global.BG_COLOR }]}>
-          <StatusBar barStyle="dark-content" />
-          <ActivityIndicator animating={true} color="white" size="large" />
-        </View>
-      )
-    }
-
+  if (isLoading) {
     return (
-
-      <View style={[global.COMMON_STYLES.container, { backgroundColor: global.BG_COLOR }]}>
-        <StatusBar barStyle="dark-content" />
-
-        <View style={[global.COMMON_STYLES.container, styles.viewBorder]}>
-          <Text style={[styles.labelText, styles.confirmedText]}>Total Confirmed</Text>
-          <Text style={[styles.numberText, styles.confirmedNumber]}>{this.state['totalConfirmed']}</Text>
-        </View>
-
-        <View style={global.COMMON_STYLES.container}>
-          <Text style={[styles.labelText, styles.deathsText]} >Total Deaths</Text>
-          <Text style={[styles.numberText, styles.deathsNumber]}>{this.state['totalDeaths']}</Text>
-        </View>
-        <View style={global.COMMON_STYLES.container}>
-          <Text style={[styles.labelText, styles.recovredText]}>Total Recovered</Text>
-          <Text style={[styles.numberText, styles.recoveredNumber]}>{this.state['totalRecoverd']}</Text>
-        </View>
-        {Platform.OS !== "web" && (
-          <AdMobBanner bannerSize="banner" adUnitID={bannerID} testID="EMULATOR" servePersonalizedAds={false} />
-        )}
-      </View>
-    )
+      <Loading />
+    );
   }
+  return (
+    <View style={[global.COMMON_STYLES.container, { backgroundColor: global.BG_COLOR }]}>
+      <StatusBar barStyle="dark-content" />
+
+      <View style={[global.COMMON_STYLES.container, styles.viewBorder]}>
+        <Text style={[styles.labelText, styles.confirmedText]}>Total Confirmed</Text>
+        <Text style={[styles.numberText, styles.confirmedNumber]}>{totalConfirmed}</Text>
+      </View>
+
+      <View style={global.COMMON_STYLES.container}>
+        <Text style={[styles.labelText, styles.deathsText]} >Total Deaths</Text>
+        <Text style={[styles.numberText, styles.deathsNumber]}>{totalDeaths}</Text>
+      </View>
+      <View style={global.COMMON_STYLES.container}>
+        <Text style={[styles.labelText, styles.recovredText]}>Total Recovered</Text>
+        <Text style={[styles.numberText, styles.recoveredNumber]}>{totalRecovred}</Text>
+      </View>
+    </View>
+  );
 }
-export default TotalsScreen;
