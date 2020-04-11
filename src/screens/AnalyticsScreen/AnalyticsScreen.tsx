@@ -4,7 +4,7 @@ import {
     ProgressChart, ProgressChartProps, ProgressChartData, StackedBarChart, StackedBarChartData, ChartConfig
 
 } from "react-native-chart-kit";
-import gloabl from '../../styles';
+import * as gloabl from '../../styles/global';
 import styles from './styles';
 import { casesByCountry } from '../../utils/api';
 import { ApiData } from '../../models/ApiData';
@@ -74,7 +74,7 @@ const stackedConfig: ChartConfig = {
 }
 
 
-class DataScreen extends React.Component {
+class AnalyticsScreen extends React.Component {
 
     constructor(props) {
         super(props);
@@ -196,4 +196,4 @@ class DataScreen extends React.Component {
         );
     }
 }
-export default DataScreen; 
+export default AnalyticsScreen; 

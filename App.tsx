@@ -3,11 +3,11 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import PlotsScreen from './src/screens/PlotsScreen';
 import TotalsScreen from './src/screens/TotalsScreen';
-import ActiveScreen from './src/screens/ActiveScreen';
-import ConfirmedScreen from './src/screens/ConfirmedScreen';
-import DataScreen from './src/screens/DataScreen/DataScreen';
+import NewsScreen from './src/screens/NewsScreen';
+import StatsScreen from './src/screens/StatsScreen';
+import AnalyticsScreen from './src/screens/AnalyticsScreen';
 import { Ionicons } from '@expo/vector-icons';
-import global from './src/styles';
+import * as global from './src/styles/global';
 
 const Tab = createBottomTabNavigator();
 
@@ -19,7 +19,7 @@ export default function App() {
         inactiveTintColor: global.LINK_COLOR,
         inactiveBackgroundColor: global.BG_COLOR,
         activeBackgroundColor: global.BG_COLOR,
-        activeTintColor: '#8cf1e7',
+        activeTintColor: global.ACTIVE_LINK_COLOR,
         labelStyle: { fontFamily: 'Roboto' }
       }} screenOptions={({ route }) => ({
         tabBarIcon: ({ focused, color, size }) => {
@@ -46,10 +46,10 @@ export default function App() {
 
       })}>
         <Tab.Screen name="Totals" component={TotalsScreen} />
-        <Tab.Screen name="Stats" component={ConfirmedScreen} />
+        <Tab.Screen name="Stats" component={StatsScreen} />
         <Tab.Screen name="Plots" component={PlotsScreen} />
-        <Tab.Screen name="Analytics" component={DataScreen} />
-        <Tab.Screen name="News" component={ActiveScreen} />
+        <Tab.Screen name="Analytics" component={AnalyticsScreen} />
+        <Tab.Screen name="News" component={NewsScreen} />
       </Tab.Navigator>
     </NavigationContainer >
   );

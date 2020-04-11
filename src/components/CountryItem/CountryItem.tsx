@@ -11,8 +11,6 @@ const CountryItem = ({ name, cases, deaths, recovered, seriousColor }) => {
             <Text style={[styles.labelText, seriousColor ? { color: '#12CBC4' } : styles.recoveredNumber]}>{recovered}</Text>
             <Text style={[styles.labelText, styles.deathsNumber]}>{deaths}</Text>
         </View>
-
     )
-
 }
 export default CountryItem; 

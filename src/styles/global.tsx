@@ -8,7 +8,7 @@ export const TEXT_COLOR = '#e5dbda';
 
 export const HEADER_TEXT_COLOR = '#fff';
 
-export const MUTED_COLOR = '#8e8786';
+export const ACTIVE_LINK_COLOR = '#8cf1e7';
 
 export const LINK_COLOR = '#19ccba';
 

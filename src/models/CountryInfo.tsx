@@ -6,15 +6,14 @@
  * total_recovered:  recoverd per country
  */
 
-
 export class CountryInfo {
 
-    active_cases?: string; // active nows
-    cases?: string;    // confirmed
+    active_cases?: string;   // active nows
+    cases?: string;          // confirmed
     country_name?: string;
     deaths?: string;
     key?: string;
-    new_cases?: string;   // new cases
+    new_cases?: string;     // new cases
     new_deaths?: string;
     region?: string;
     serious_critical?: string;
@@ -24,4 +23,5 @@ export class CountryInfo {
     constructor() {
 
     }
+
 }

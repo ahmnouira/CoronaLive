@@ -9,7 +9,7 @@ export const toNumber = (str: string): number =>
     parseInt(str.replace(/,/g, ''));
 
 export const getTopOf = (arr: Array<CountryInfo>, info: string, top: number): Array<CountryInfo> =>
-    arr.sort((a, b) => parseInt(b[info].replace(/,/g, '')) - parseInt(a[info].replace(/,/g, ''))).slice(0, top);
+    arr.sort((a, b) => toNumber(b[info]) - toNumber(a[info])).slice(0, top);
 
 // helper: get list of countries names 
 /* private getNames(arry: CountryInfo[]): string[] {
@@ -20,5 +20,5 @@ export const getTopOf = (arr: Array<CountryInfo>, info: string, top: number): Ar
 
 // helper: get the total
 export const totalOf = (arr: Array<CountryInfo>, str: string): number =>
-    arr.map((c) => parseInt(c[str].replace(/,/g, ''))).reduce((pValue, cValue) => pValue + cValue, 0);
+    arr.map((c) => toNumber(c[str])).reduce((pValue, cValue) => pValue + cValue, 0);
 

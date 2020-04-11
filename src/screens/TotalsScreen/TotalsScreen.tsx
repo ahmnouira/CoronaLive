@@ -1,30 +1,28 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, Text, StatusBar } from 'react-native';
 import styles from './styles';
 import { casesByCountry } from '../../utils/api';
 import { numberWithComma, totalOf } from '../../utils/helpers';
 import { ApiData } from '../../models/ApiData';
 import Loading from '../../components/Loading/Loading';
-import global from '../../styles';
+import * as global from '../../styles/global';
 
 export default function TotalsScreen(): JSX.Element {
 
-  const [totalConfirmed, setTotalConfirmed] = React.useState('');
-  const [totalDeaths, setTotalDeaths] = React.useState('');
-  const [totalRecovred, setTotalRecovred] = React.useState('');
-  const [isLoading, setIsLoading] = React.useState(true);
+  const [totalConfirmed, setTotalConfirmed] = useState('');
+  const [totalDeaths, setTotalDeaths] = useState('');
+  const [totalRecovred, setTotalRecovred] = useState('');
+  const [isLoading, setIsLoading] = useState(true);
 
-  React.useEffect(() => {
+  useEffect(() => {
 
     casesByCountry().then((res: ApiData) => {
 
       const { statistic_taken_at, countries_stat } = res;
-
       setTotalConfirmed(numberWithComma(totalOf(countries_stat, 'cases')));
       setTotalDeaths(numberWithComma(totalOf(countries_stat, 'deaths')));
       setTotalRecovred(numberWithComma(totalOf(countries_stat, 'total_recovered')));
       setIsLoading(false);
-
     }).catch(err => console.error(err));
   });
 

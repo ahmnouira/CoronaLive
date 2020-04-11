@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, Text, Button, ActivityIndicator, StatusBar, ScrollView, SafeAreaView } from 'react-native';
-import global from '../../styles';
+import * as global from '../../styles/global';
 import styles from './styles';
 import { casesByCountry } from '../../utils/api';
 import { CountryInfo } from '../../models/CountryInfo';
@@ -8,7 +8,7 @@ import CountryItem from '../../components/CountryItem';
 import { ApiData } from '../../models/ApiData';
 import Loading from '../../components/Loading/Loading';
 
-export default function ConfirmedScreen() {
+export default function StatsScreen() {
 
   const [lastUpdated, setLastUpdated] = React.useState('');
   const [isLoading, setIsLoading] = React.useState(true);

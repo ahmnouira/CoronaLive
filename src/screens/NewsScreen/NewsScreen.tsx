@@ -1,15 +1,15 @@
 import React from 'react';
 import { View, Text, SafeAreaView, StatusBar, ActivityIndicator, ScrollView } from 'react-native';
-import global from '../../styles';
+import * as global from '../../styles/global';
 import { CountryInfo } from '../../models/CountryInfo';
 import { casesByCountry } from '../../utils/api';
 import { ApiData } from '../../models/ApiData';
 import CountryItem from '../../components/CountryItem';
 
 // because the same styling here
-import styles from '../ConfirmedScreen/styles';
+import styles from '../StatsScreen/styles';
 
-class ActiveScreen extends React.Component {
+class NewsScreen extends React.Component {
 
 
   constructor(props: any) {
@@ -43,7 +43,7 @@ class ActiveScreen extends React.Component {
   }
 
 
-  
+
 
 
   _filterByCountryName = () => {
@@ -71,9 +71,9 @@ class ActiveScreen extends React.Component {
     return (
       <SafeAreaView style={{ flex: 1, backgroundColor: global.BG_COLOR }}>
         <StatusBar barStyle="dark-content" />
-        
+
         <View style={styles.header}>
-          <Text  style={[styles.labelText, styles.countryText]} onPress={() => this._filterByCountryName()}>Country</Text>
+          <Text style={[styles.labelText, styles.countryText]} onPress={() => this._filterByCountryName()}>Country</Text>
           <Text style={[styles.labelText, styles.confirmedText]} onPress={() => this._getData()}>Cases</Text>
           <Text style={[styles.labelText, { color: '#81ecec' }]} onPress={() => this._getData('serious_critical')}>Serious</Text>
           <Text style={[styles.labelText, styles.deathsText]} onPress={() => this._getData('new_deaths')}>Deaths</Text>
@@ -99,4 +99,4 @@ class ActiveScreen extends React.Component {
 
 
 
-export default ActiveScreen;
+export default NewsScreen;

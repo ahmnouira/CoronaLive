@@ -1,5 +1,16 @@
 {
   "main": "node_modules/expo/AppEntry.js",
+  "description": "A React Native application to track the COVID-19 around the world.",
+  "author": {
+    "email": "ahmnouira@gmail.com",
+    "name": "Ahmed Nouira"
+  },
+  "repository": {
+    "type": "git",
+    "directory": "https://github.com/ahmnouira/CoronaLive"
+  },
+  "license": "MIT",
+  "readme": "https://github.com/ahmnouira/CoronaLive#readme",
   "scripts": {
     "start": "expo start",
     "android": "expo start --android",
@@ -8,27 +19,27 @@
     "eject": "expo eject"
   },
   "dependencies": {
-    "@react-native-community/masked-view": "0.1.5",
-    "@react-navigation/bottom-tabs": "^5.2.2",
-    "@react-navigation/native": "^5.1.1",
-    "expo": "~36.0.0",
-    "react": "~16.9.0",
-    "react-dom": "~16.9.0",
+    "@react-native-community/masked-view": "0.1.7",
+    "@react-navigation/bottom-tabs": "^5.2.5",
+    "@react-navigation/native": "^5.1.4",
+    "expo": "~37.0.6",
+    "react": "~16.13.1",
+    "react-dom": "~16.13.1",
     "react-native": "https://github.com/expo/react-native/archive/sdk-36.0.0.tar.gz",
-    "react-native-chart-kit": "^5.2.0",
-    "react-native-gesture-handler": "~1.5.0",
-    "react-native-reanimated": "~1.4.0",
-    "react-native-safe-area-context": "0.6.0",
-    "react-native-screens": "2.0.0-alpha.12",
-    "react-native-svg": "^9.13.3",
-    "react-native-web": "~0.11.7",
-    "react-native-webview": "^7.4.3"
+    "react-native-chart-kit": "^5.3.0",
+    "react-native-gesture-handler": "~1.6.1",
+    "react-native-reanimated": "~1.8.0",
+    "react-native-safe-area-context": "0.7.3",
+    "react-native-screens": "2.4.0",
+    "react-native-svg": "^12.0.3",
+    "react-native-web": "~0.12.2",
+    "react-native-webview": "^9.1.1"
   },
   "devDependencies": {
     "@babel/core": "^7.0.0",
-    "@types/react": "~16.9.0",
-    "@types/react-native": "~0.60.23",
-    "babel-preset-expo": "~8.0.0",
-    "typescript": "~3.6.3"
+    "@types/react": "~16.9.32",
+    "@types/react-native": "~0.62.2",
+    "babel-preset-expo": "~8.1.0",
+    "typescript": "~3.8.3"
   }
 }

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { View, Text, StatusBar, Dimensions } from 'react-native';
 import styles from './styles';
 import { BarChart, PieChart, ChartConfig, ChartData } from "react-native-chart-kit";
-import gloabl from '../../styles';
+import * as gloabl from '../../styles/global';
 import { casesByCountry } from '../../utils/api';
 import { getTopOf, toNumber, totalOf } from '../../utils/helpers';
 import { ApiData } from '../../models/ApiData';
