@@ -32,6 +32,7 @@ export default function TotalsScreen(): JSX.Element {
     );
   }
   return (
+    
     <View style={[global.COMMON_STYLES.container, { backgroundColor: global.BG_COLOR }]}>
       <StatusBar barStyle="dark-content" />
 
@@ -44,10 +45,12 @@ export default function TotalsScreen(): JSX.Element {
         <Text style={[styles.labelText, styles.deathsText]} >Total Deaths</Text>
         <Text style={[styles.numberText, styles.deathsNumber]}>{totalDeaths}</Text>
       </View>
+
       <View style={global.COMMON_STYLES.container}>
         <Text style={[styles.labelText, styles.recovredText]}>Total Recovered</Text>
         <Text style={[styles.numberText, styles.recoveredNumber]}>{totalRecovred}</Text>
       </View>
+
     </View>
   );
 }

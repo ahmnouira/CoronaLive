@@ -1,5 +1,5 @@
-import React from 'react';
-import { View, Text, Button, ActivityIndicator, StatusBar, ScrollView, SafeAreaView } from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { View, Text, StatusBar, ScrollView, SafeAreaView } from 'react-native';
 import * as global from '../../styles/global';
 import styles from './styles';
 import { casesByCountry } from '../../utils/api';
@@ -10,11 +10,11 @@ import Loading from '../../components/Loading/Loading';
 
 export default function StatsScreen() {
 
-  const [lastUpdated, setLastUpdated] = React.useState('');
-  const [isLoading, setIsLoading] = React.useState(true);
-  const [info, setInfo] = React.useState(Array<CountryInfo>());
+  const [lastUpdated, setLastUpdated] = useState('');
+  const [isLoading, setIsLoading] = useState(true);
+  const [info, setInfo] = useState(Array<CountryInfo>());
 
-  React.useEffect(() => {
+  useEffect(() => {
 
     casesByCountry().then((res: ApiData) => {
       let { statistic_taken_at, countries_stat } = res;
