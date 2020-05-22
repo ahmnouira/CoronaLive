@@ -22,7 +22,8 @@ export default function StatsScreen() {
       setInfo(_addKeys(countries_stat));
       setLastUpdated(statistic_taken_at);
     });
-  });
+    
+  }, []);
 
 
   const _addKeys = (arrCountryInfo: CountryInfo[]) =>

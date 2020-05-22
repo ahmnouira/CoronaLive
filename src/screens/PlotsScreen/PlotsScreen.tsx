@@ -44,7 +44,7 @@ export default function PlotsScreen() {
 
   useEffect(() => {
     _getTotats();
-  });
+  }, []);
 
   const _getTotats = () => {
 

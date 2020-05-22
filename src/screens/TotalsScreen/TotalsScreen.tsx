@@ -18,13 +18,21 @@ export default function TotalsScreen(): JSX.Element {
 
     casesByCountry().then((res: ApiData) => {
 
+
+      console.log(res);
+
       const { statistic_taken_at, countries_stat } = res;
       setTotalConfirmed(numberWithComma(totalOf(countries_stat, 'cases')));
       setTotalDeaths(numberWithComma(totalOf(countries_stat, 'deaths')));
+
+      // total tests 
+      console.log(totalOf(countries_stat, 'total_tests')); 
+
       setTotalRecovred(numberWithComma(totalOf(countries_stat, 'total_recovered')));
       setIsLoading(false);
     }).catch(err => console.error(err));
-  });
+
+  }, []);
 
   if (isLoading) {
     return (
@@ -32,7 +40,7 @@ export default function TotalsScreen(): JSX.Element {
     );
   }
   return (
-    
+
     <View style={[global.COMMON_STYLES.container, { backgroundColor: global.BG_COLOR }]}>
       <StatusBar barStyle="dark-content" />
 

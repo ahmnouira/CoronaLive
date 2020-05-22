@@ -19,6 +19,7 @@ export const getTopOf = (arr: Array<CountryInfo>, info: string, top: number): Ar
 } */
 
 // helper: get the total
-export const totalOf = (arr: Array<CountryInfo>, str: string): number =>
-    arr.map((c) => toNumber(c[str])).reduce((pValue, cValue) => pValue + cValue, 0);
+export const totalOf = (arr: Array<CountryInfo>, str: string): number => {
+    return arr.map((c) => toNumber(c[str])).reduce((pValue, cValue) => pValue + cValue, 0);
+}
 
