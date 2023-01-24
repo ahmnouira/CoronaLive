@@ -1,10 +1,10 @@
 # CoronaLive
 
-A React Native application to track the COVID-19 around the world. 
+ ![visitors](https://visitor-badge.glitch.me/badge?page_id=ahmnouira.CoronaLive)
 
----
+> A React Native application to track the COVID-19 around the world. 
 
-### Screenshots 
+## Screenshots 
 
 <p align="center">
     <img src="images/screenshot_1.png" width="23%" height="80%">
